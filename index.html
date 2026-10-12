@@ -15,7 +15,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 html{min-height:100%;scroll-behavior:smooth}
-body{font-family:'Hind Siliguri','Inter',sans-serif;background:#f0fdf4;min-height:100vh;display:flex;flex-direction:column}
+body{font-family:'Hind Siliguri','Inter',sans-serif;background:#f0fdf4;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+#homeMenu{flex:1 0 auto}
+#welcomeCopyright{flex-shrink:0;width:100%;margin-top:auto;position:relative;clear:both}
 /* Responsive, animated welcome page */
 #welcomeHeader{position:relative;isolation:isolate;overflow:hidden;flex-shrink:0;background:radial-gradient(ellipse at 12% 20%,rgba(110,231,183,.24),transparent 34%),radial-gradient(ellipse at 88% 5%,rgba(125,211,252,.20),transparent 32%),linear-gradient(135deg,#052e2b 0%,#065f46 48%,#0f766e 100%);padding:clamp(2.6rem,7vw,5.6rem) 1.25rem clamp(3.5rem,8vw,6rem);box-shadow:0 18px 45px rgba(6,78,59,.15)}
 #welcomeHeader:before,#welcomeHeader:after{content:"";position:absolute;z-index:-1;border:1px solid rgba(255,255,255,.16);border-radius:50%;pointer-events:none}
@@ -57,7 +59,7 @@ body{font-family:'Hind Siliguri','Inter',sans-serif;background:#f0fdf4;min-heigh
 @keyframes welcomeFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-16px,0)}}
 @keyframes orbitTurn{to{transform:rotate(382deg)}}
 @keyframes bookBob{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-9px) rotate(-2deg)}}
-@media(max-width:700px){#welcomeHeader{padding:2.3rem 1.1rem 3rem}.welcome-inner{grid-template-columns:1fr;gap:1rem;text-align:center}.welcome-copy h1{margin-top:.9rem}.welcome-copy p{margin:0 auto;line-height:1.7}.welcome-art{width:170px;grid-row:1; margin:0 auto -0.2rem}.welcome-book{border-radius:23px;font-size:4.7rem}.welcome-eyebrow{font-size:.78rem}.home-section-heading{margin-bottom:1.25rem}.home-choice-grid{grid-template-columns:1fr;gap:.9rem}.home-choice{min-height:130px;padding:1.15rem;border-radius:21px;gap:.9rem}.choice-icon{flex-basis:62px;width:62px;height:62px;border-radius:18px;font-size:1.9rem}.choice-title{font-size:1.4rem}.choice-description{font-size:.9rem;margin-top:.2rem}.choice-action{margin-top:.6rem;font-size:.85rem}#welcomeCopyright{padding:1rem .75rem}#welcomeCopyright p{font-size:.78rem;line-height:1.6}}
+@media(max-width:700px){#welcomeHeader{padding:2.3rem 1.1rem 3rem}.welcome-inner{grid-template-columns:1fr;gap:1rem;text-align:center}.welcome-copy h1{margin-top:.9rem}.welcome-copy p{margin:0 auto;line-height:1.7}.welcome-art{width:170px;grid-row:1; margin:0 auto -0.2rem}.welcome-book{border-radius:23px;font-size:4.7rem}.welcome-eyebrow{font-size:.78rem}.home-section-heading{margin-bottom:1.25rem}.home-choice-grid{grid-template-columns:1fr;gap:.9rem}.home-choice{min-height:130px;padding:1.15rem;border-radius:21px;gap:.9rem}.choice-icon{flex-basis:62px;width:62px;height:62px;border-radius:18px;font-size:1.9rem}.choice-title{font-size:1.4rem}.choice-description{font-size:.9rem;margin-top:.2rem}.choice-action{margin-top:.6rem;font-size:.85rem}#welcomeCopyright{padding:1rem .75rem;margin-top:auto;flex-shrink:0;width:100%;position:relative;bottom:auto}#welcomeCopyright p{font-size:.78rem;line-height:1.6;max-width:100%;overflow-wrap:anywhere}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
 /* Bengali-first typography for clear, readable Bangla throughout the site */
@@ -77,7 +79,17 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
 @media(max-width:768px){body{padding-bottom:90px}.desktop-nav:not(.hidden){display:none!important}.mobile-nav:not(.hidden){display:flex}}
 @media(min-width:769px){.mobile-nav:not(.hidden){display:none}.desktop-nav:not(.hidden){display:flex}}
 
-.german-word{position:relative;cursor:pointer}
+.german-word{position:relative;display:inline-flex;align-items:center;flex-wrap:wrap;column-gap:6px;row-gap:4px;max-width:100%;white-space:normal;overflow-wrap:anywhere;cursor:pointer;transition:background .18s ease,color .18s ease}
+/* Keep the audio button attached to the German word, never drifting toward Bengali meaning */
+.german-word .pronounce-hint{flex:0 0 auto;margin:0!important;vertical-align:middle}
+.german-word.is-speaking{max-width:100%;padding:2px 4px}
+/* Audio is triggered by clicking the German word itself; no inline icon needed */
+.german-word .pronounce-hint{display:inline-flex;align-items:center;justify-content:center;gap:4px;margin-left:7px;padding:3px 7px;border:1px solid #86efac;border-radius:999px;background:#dcfce7;color:#166534;font-family:'Hind Siliguri','Inter',sans-serif;font-size:11px;font-weight:700;line-height:1.35;vertical-align:middle;white-space:nowrap;box-shadow:0 1px 2px rgba(22,101,52,.08)}
+.german-word:hover .pronounce-hint,.german-word:focus-within .pronounce-hint{background:#16a34a;color:#fff;border-color:#16a34a}
+.german-word.is-speaking{background:#dcfce7!important;border-radius:6px;outline:2px solid #86efac;outline-offset:2px}
+.pronunciation-guide{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 14px;padding:10px 13px;border:1px solid #a7f3d0;border-radius:12px;background:linear-gradient(90deg,#f0fdf4,#ecfeff);color:#14532d;font-size:14px;line-height:1.5}
+.pronunciation-guide .guide-icon{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:10px;background:#16a34a;color:white;font-size:19px}
+@media(max-width:768px){.german-word .pronounce-hint{margin-left:5px;padding:3px 6px;font-size:10px}.pronunciation-guide{font-size:13px;padding:9px 10px;gap:7px}}
 .audio-pop{
   position:absolute;left:50%;top:-8px;transform:translate(-50%,-100%);
   background:#16a34a;color:#fff;font-size:14px;padding:4px 8px;border-radius:999px;
@@ -90,6 +102,73 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
   80%{opacity:1;transform:translate(-50%,-130%)}
   100%{opacity:0;transform:translate(-50%,-160%)}
 }
+
+/* Mobile-first A2 glossary readability */
+@media (max-width: 768px){
+  #bookContent{padding-left:10px!important;padding-right:10px!important;padding-top:14px!important;padding-bottom:24px!important}
+  #bookContent .chapter-section{margin-bottom:18px}
+  #bookContent .chapter-section h2{font-size:1.05rem!important;line-height:1.45!important}
+  #bookContent .section-card{border-radius:14px;margin-bottom:14px;box-shadow:0 3px 14px rgba(15,23,42,.07)}
+  #bookContent .section-header{padding:10px 12px}
+  #bookContent .section-header span{font-size:13px}
+  #bookContent .overflow-x-auto{overflow:visible!important}
+  #bookContent table,#bookContent tbody{display:block;width:100%;min-width:0!important}
+  #bookContent thead{display:none}
+  #bookContent tbody{display:grid;grid-template-columns:1fr;gap:10px;padding:10px;background:#f8fafc}
+  #bookContent tr.vocab-row{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid #e2e8f0!important;border-radius:12px;overflow:hidden;box-shadow:0 2px 7px rgba(15,23,42,.04)}
+  #bookContent tr.vocab-row td{display:block!important;width:auto!important;padding:9px 10px!important;border:0!important;min-width:0;overflow-wrap:anywhere;word-break:normal;font-size:13px!important;line-height:1.55!important}
+  #bookContent tr.vocab-row td:before{content:attr(data-label);display:block;margin-bottom:3px;color:#64748b;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  #bookContent tr.vocab-row td:nth-child(1){grid-column:1/-1;background:#f1f5f9;padding:5px 10px!important;color:#64748b!important;font-size:11px!important}
+  #bookContent tr.vocab-row td:nth-child(1):before{content:"WORD NO.";display:inline;margin:0 7px 0 0}
+  #bookContent tr.vocab-row td:nth-child(2){background:#f0fdf4;color:#14532d!important;font-size:15px!important;font-weight:700}
+  #bookContent tr.vocab-row td:nth-child(2):before{color:#15803d}
+  #bookContent tr.vocab-row td:nth-child(3){background:#fff}
+  #bookContent tr.vocab-row td:nth-child(4){border-top:1px solid #f1f5f9!important}
+  #bookContent tr.vocab-row td:nth-child(5){grid-column:1/-1;border-top:1px solid #e2e8f0!important;background:#fffbeb;font-size:13px!important}
+  #bookContent tr.vocab-row td:nth-child(5):before{color:#a16207}
+  .mobile-nav:not(.hidden){display:block!important;overflow:visible!important;padding:7px 8px calc(7px + env(safe-area-inset-bottom))!important;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid #d1fae5}
+  .mobile-nav>div{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px!important;min-width:0!important;width:100%;max-width:520px}
+  .mobile-nav .nav-btn{display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px 2px!important;border-radius:10px!important;font-size:12px!important;background:#f1f5f9!important;border:1px solid #e2e8f0;color:#475569!important}
+  .mobile-nav .nav-btn.active{background:#059669!important;border-color:#059669!important;color:#fff!important;box-shadow:0 3px 8px rgba(5,150,105,.22)}
+  body{padding-bottom:112px!important}
+}
+@media (max-width:360px){#bookContent tr.vocab-row{grid-template-columns:1fr 1fr}#bookContent tr.vocab-row td{padding:8px!important;font-size:12px!important}.mobile-nav .nav-btn{font-size:11px!important;min-height:31px}}
+
+</style>
+<style id="mobile-audio-footer-fix">
+/* Final mobile fixes: keep audio control away from Bengali meaning */
+@media(max-width:768px){
+  #bookContent tr.vocab-row td:nth-child(2){
+    display:flex!important; flex-direction:column!important; align-items:flex-start!important;
+    gap:8px!important; min-width:0!important; overflow:visible!important;
+    padding:12px 10px!important;
+  }
+  #bookContent tr.vocab-row td:nth-child(2) .german-word{
+    display:flex!important; flex-direction:column!important; align-items:flex-start!important;
+    gap:8px!important; width:100%!important; max-width:100%!important;
+    overflow-wrap:anywhere!important; word-break:normal!important; line-height:1.45!important;
+  }
+  #bookContent tr.vocab-row td:nth-child(2) .pronounce-hint{
+    display:inline-flex!important; position:static!important; align-self:flex-start!important;
+    margin:0!important; max-width:100%!important; flex-shrink:0!important;
+  }
+  #bookContent tr.vocab-row td:nth-child(3){
+    min-width:0!important; overflow-wrap:anywhere!important; word-break:normal!important;
+    line-height:1.7!important; padding:12px 10px!important;
+  }
+  #bookContent tr.vocab-row td:nth-child(2) .german-word.is-speaking{
+    outline:none!important; box-shadow:0 0 0 2px #86efac!important;
+  }
+  #welcomeCopyright{
+    position:static!important; margin-top:auto!important; flex-shrink:0!important;
+    clear:both!important; width:100%!important;
+  }
+  #welcomePage, #welcomeScreen, .welcome-page{
+    min-height:100vh!important; min-height:100dvh!important;
+    display:flex!important; flex-direction:column!important;
+  }
+  #welcomeCopyright p{margin:0 auto!important;line-height:1.7!important}
+}
 </style>
 </head>
 <body class="text-gray-800 antialiased">
@@ -98,8 +177,6 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
     <div class="welcome-copy">
       <div class="welcome-eyebrow"><span aria-hidden="true">✦</span> DEUTSCH LERNEN • STEP BY STEP</div>
       <h1>Welcome to<br><span>German Learning</span></h1>
-      <p>জার্মান শেখার যাত্রা শুরু হোক এখান থেকে। বই পড়ো, নতুন শব্দ শেখো এবং নিজের গতিতে প্রতিদিন একটু একটু করে এগিয়ে যাও।</p>
-    </div>
     <div class="welcome-art" aria-hidden="true"><div class="welcome-art-orbit"></div><div class="welcome-book">📚</div></div>
   </div>
 </header>
@@ -146,6 +223,7 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
 <button onclick="showChapter(12)" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-green-100">Kap 12</button>
 </div>
 <main id="bookContent" class="hidden relative z-10 max-w-6xl mx-auto px-3 sm:px-6 pt-6 pb-8">
+<div class="pronunciation-guide"><span class="guide-icon" aria-hidden="true">🔊</span><span><strong>উচ্চারণ শুনতে চান?</strong> যেকোনো জার্মান শব্দের ওপর সরাসরি ক্লিক করুন।</span></div>
 <button onclick="backToLevels()" class="mb-5 px-4 py-2 rounded-lg bg-white border border-green-300 text-green-800 font-semibold shadow-sm hover:bg-green-50">← Back to Levels</button>
 <div id="chapter-1" class="chapter-section active">
 <div class="bg-gradient-to-r from-green-800 to-emerald-700 text-white px-4 py-4 text-center rounded-2xl mb-5 shadow-lg">
@@ -8270,18 +8348,44 @@ window.scrollTo({top:0,behavior:'smooth'});
 document.addEventListener('DOMContentLoaded',()=>{
 const synth=window.speechSynthesis;
 document.querySelectorAll('.german-word').forEach(el=>{
-const txt=el.innerText.trim();el.classList.add('cursor-pointer');el.title='উচ্চারণ শুনতে ক্লিক করুন';
-el.addEventListener('click',()=>{
-if(synth.speaking)synth.cancel();
-const u=new SpeechSynthesisUtterance(txt);u.lang='de-DE';u.rate=0.85;
-el.classList.add('text-red-600');
-const pop=document.createElement('span');pop.className='audio-pop';pop.textContent='🔊';
-el.appendChild(pop);setTimeout(()=>pop.remove(),900);
-u.onend=()=>el.classList.remove('text-red-600');
-synth.speak(u);
-});
+  // Add a clear, visible control so users know the word can be played.
+  const txt=el.innerText.trim();
+  el.classList.add('cursor-pointer');
+  el.setAttribute('role','button');
+  el.setAttribute('tabindex','0');
+  el.setAttribute('aria-label','জার্মান উচ্চারণ শুনুন: '+txt);
+  el.title='উচ্চারণ শুনতে ক্লিক করুন';
+  const playWord=()=>{
+    if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
+      alert('দুঃখিত, আপনার ব্রাউজারে শব্দ শোনার সুবিধা নেই। অন্য ব্রাউজারে চেষ্টা করুন।');
+      return;
+    }
+    if(synth.speaking)synth.cancel();
+    const u=new SpeechSynthesisUtterance(txt);u.lang='de-DE';u.rate=0.85;
+    el.classList.add('is-speaking');
+    const pop=document.createElement('span');pop.className='audio-pop';pop.textContent='🔊 বাজছে';
+    el.appendChild(pop);setTimeout(()=>pop.remove(),1100);
+    u.onend=()=>el.classList.remove('is-speaking');
+    u.onerror=()=>el.classList.remove('is-speaking');
+    synth.speak(u);
+  };
+  el.addEventListener('click',playWord);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();playWord();}});
 });
 });
 </script>
+
+<script>
+// Add semantic labels to vocabulary cells so mobile cards stay easy to scan.
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('#bookContent table').forEach(function(table){
+    var headers=Array.from(table.querySelectorAll('thead th')).map(function(th){return th.textContent.trim()});
+    table.querySelectorAll('tbody tr').forEach(function(row){
+      Array.from(row.cells).forEach(function(cell,index){if(headers[index])cell.setAttribute('data-label',headers[index]);});
+    });
+  });
+});
+</script>
+
 </body>
 </html>
