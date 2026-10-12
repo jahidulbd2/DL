@@ -14,7 +14,54 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body{font-family:'Inter','Hind Siliguri',sans-serif;background:#f0fdf4}
+html{min-height:100%;scroll-behavior:smooth}
+body{font-family:'Hind Siliguri','Inter',sans-serif;background:#f0fdf4;min-height:100vh;display:flex;flex-direction:column}
+/* Responsive, animated welcome page */
+#welcomeHeader{position:relative;isolation:isolate;overflow:hidden;flex-shrink:0;background:radial-gradient(ellipse at 12% 20%,rgba(110,231,183,.24),transparent 34%),radial-gradient(ellipse at 88% 5%,rgba(125,211,252,.20),transparent 32%),linear-gradient(135deg,#052e2b 0%,#065f46 48%,#0f766e 100%);padding:clamp(2.6rem,7vw,5.6rem) 1.25rem clamp(3.5rem,8vw,6rem);box-shadow:0 18px 45px rgba(6,78,59,.15)}
+#welcomeHeader:before,#welcomeHeader:after{content:"";position:absolute;z-index:-1;border:1px solid rgba(255,255,255,.16);border-radius:50%;pointer-events:none}
+#welcomeHeader:before{width:clamp(220px,34vw,440px);height:clamp(220px,34vw,440px);right:-8%;top:-48%;animation:welcomeFloat 9s ease-in-out infinite}
+#welcomeHeader:after{width:clamp(130px,20vw,260px);height:clamp(130px,20vw,260px);left:-5%;bottom:-45%;animation:welcomeFloat 7s ease-in-out infinite reverse}
+.welcome-inner{max-width:1120px;margin:auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);align-items:center;gap:2rem;text-align:left}
+.welcome-copy{animation:welcomeRise .75s ease both}
+.welcome-eyebrow{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem .85rem;border:1px solid rgba(167,243,208,.32);border-radius:999px;background:rgba(6,78,59,.34);color:#d1fae5;font-size:.9rem;font-weight:600;letter-spacing:.02em}
+.welcome-copy h1{font-size:clamp(2.65rem,6vw,5.25rem);line-height:1.05;letter-spacing:-.04em;margin:1.1rem 0 .8rem;font-weight:800}
+.welcome-copy h1 span{color:#a7f3d0}
+.welcome-copy p{max-width:610px;color:#d1fae5;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.8;margin:0}
+.welcome-art{justify-self:center;width:min(100%,330px);aspect-ratio:1;position:relative;display:grid;place-items:center;animation:welcomeRise .9s .12s ease both}
+.welcome-art-orbit{position:absolute;inset:8%;border:1px solid rgba(209,250,229,.28);border-radius:36%;transform:rotate(22deg);animation:orbitTurn 24s linear infinite}
+.welcome-art-orbit:before,.welcome-art-orbit:after{content:"";position:absolute;width:13px;height:13px;background:#a7f3d0;border-radius:50%;box-shadow:0 0 20px rgba(167,243,208,.7)}
+.welcome-art-orbit:before{top:9%;left:17%}.welcome-art-orbit:after{right:7%;bottom:20%;width:9px;height:9px;background:#bae6fd}
+.welcome-book{width:72%;height:72%;border-radius:30px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.24);box-shadow:0 24px 70px rgba(2,44,34,.3),inset 0 1px 0 rgba(255,255,255,.22);backdrop-filter:blur(10px);font-size:clamp(5rem,11vw,8rem);transform:rotate(-5deg);animation:bookBob 5s ease-in-out infinite}
+#homeMenu{width:100%;max-width:1120px;margin:0 auto;flex:1;padding:clamp(2rem,5vw,4rem) 1.25rem clamp(2.5rem,5vw,4.5rem)}
+.home-section-heading{text-align:center;margin-bottom:1.8rem;animation:welcomeRise .7s .12s ease both}
+.home-section-heading .mini-label{color:#047857;font-size:.8rem;letter-spacing:.18em;font-weight:800;text-transform:uppercase}
+.home-section-heading h2{font-size:clamp(1.6rem,3vw,2.25rem);font-weight:800;color:#102a27;margin:.45rem 0 .35rem}
+.home-section-heading p{color:#64748b;margin:0;font-size:1rem}
+.home-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.4vw,1.6rem);max-width:900px;margin:0 auto}
+.home-choice{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:1.1rem;text-align:left;width:100%;min-height:190px;padding:clamp(1.25rem,3vw,2rem);border:1px solid #e2e8f0;border-radius:26px;background:rgba(255,255,255,.92);color:#0f172a;box-shadow:0 12px 35px rgba(15,23,42,.06);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;animation:welcomeRise .65s ease both}
+.home-choice:nth-child(2){animation-delay:.1s}
+.home-choice:before{content:"";position:absolute;z-index:-1;width:170px;height:170px;border-radius:50%;right:-75px;top:-82px;background:var(--choice-glow);transition:transform .35s ease}
+.home-choice:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(15,23,42,.12);border-color:var(--choice-accent)}
+.home-choice:hover:before{transform:scale(1.25)}
+.home-choice.book-choice{--choice-accent:#10b981;--choice-glow:#d1fae5}
+.home-choice.glossar-choice{--choice-accent:#818cf8;--choice-glow:#e0e7ff}
+.choice-icon{flex:0 0 76px;width:76px;height:76px;display:grid;place-items:center;border-radius:22px;background:var(--choice-glow);font-size:2.35rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.choice-content{min-width:0;display:block}
+.choice-title{display:block;font-size:clamp(1.35rem,2.5vw,1.85rem);font-weight:800;letter-spacing:-.025em;color:#0f2926}
+.choice-description{display:block;margin-top:.35rem;color:#64748b;font-size:.98rem;line-height:1.55;font-weight:400}
+.choice-action{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;color:var(--choice-accent);font-size:.9rem;font-weight:800}
+#levelMenu{width:100%;max-width:900px;margin:0 auto;flex:1}
+#welcomeCopyright{margin-top:auto;background:#062f2a;border-top:1px solid rgba(167,243,208,.15);padding:1.15rem 1rem;color:#d1fae5}
+#welcomeCopyright a{text-decoration:none}
+@keyframes welcomeRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes welcomeFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-16px,0)}}
+@keyframes orbitTurn{to{transform:rotate(382deg)}}
+@keyframes bookBob{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-9px) rotate(-2deg)}}
+@media(max-width:700px){#welcomeHeader{padding:2.3rem 1.1rem 3rem}.welcome-inner{grid-template-columns:1fr;gap:1rem;text-align:center}.welcome-copy h1{margin-top:.9rem}.welcome-copy p{margin:0 auto;line-height:1.7}.welcome-art{width:170px;grid-row:1; margin:0 auto -0.2rem}.welcome-book{border-radius:23px;font-size:4.7rem}.welcome-eyebrow{font-size:.78rem}.home-section-heading{margin-bottom:1.25rem}.home-choice-grid{grid-template-columns:1fr;gap:.9rem}.home-choice{min-height:130px;padding:1.15rem;border-radius:21px;gap:.9rem}.choice-icon{flex-basis:62px;width:62px;height:62px;border-radius:18px;font-size:1.9rem}.choice-title{font-size:1.4rem}.choice-description{font-size:.9rem;margin-top:.2rem}.choice-action{margin-top:.6rem;font-size:.85rem}#welcomeCopyright{padding:1rem .75rem}#welcomeCopyright p{font-size:.78rem;line-height:1.6}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Bengali-first typography for clear, readable Bangla throughout the site */
+body,button,input,textarea,select{font-family:'Hind Siliguri','Inter',sans-serif}
 ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#86efac;border-radius:4px}
 table{width:100%;min-width:680px;border-collapse:collapse}
 th,td{text-align:left !important;vertical-align:middle;white-space:nowrap;padding:11px 14px}
@@ -27,8 +74,8 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
 .section-card{background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid #e5e7eb;margin-bottom:20px;overflow:hidden}
 .section-header{background:#1e293b;padding:12px 18px}
 .section-header span{color:#fbbf24;font-weight:700;font-size:15px;letter-spacing:.3px}
-@media(max-width:768px){body{padding-bottom:90px}.desktop-nav{display:none!important}.mobile-nav{display:flex!important}}
-@media(min-width:769px){.mobile-nav{display:none!important}.desktop-nav{display:flex!important}}
+@media(max-width:768px){body{padding-bottom:90px}.desktop-nav:not(.hidden){display:none!important}.mobile-nav:not(.hidden){display:flex}}
+@media(min-width:769px){.mobile-nav:not(.hidden){display:none}.desktop-nav:not(.hidden){display:flex}}
 
 .german-word{position:relative;cursor:pointer}
 .audio-pop{
@@ -46,14 +93,44 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
 </style>
 </head>
 <body class="text-gray-800 antialiased">
-<header class="relative z-10 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-700 pt-12 pb-16 px-4 shadow-xl text-center">
-<div class="max-w-5xl mx-auto">
-<span class="bg-white/20 text-white px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase">Netzwerk Neu </span>
-<h1 class="text-3xl md:text-5xl font-bold text-white mt-5 mb-3">A2 Glossar</h1>
-<p class="text-green-100 text-base md:text-lg">সম্পূর্ণ অধ্যায়ের শব্দভাণ্ডার<br>
-<span class="font-medium text-yellow-200 bg-black/20 px-3 py-1 rounded-full text-xs md:text-sm inline-block mt-2">🔊 জার্মান শব্দে ক্লিক করে উচ্চারণ শুনুন</span></p>
-</div>
+<header id="welcomeHeader" class="relative z-10 text-white">
+  <div class="welcome-inner">
+    <div class="welcome-copy">
+      <div class="welcome-eyebrow"><span aria-hidden="true">✦</span> DEUTSCH LERNEN • STEP BY STEP</div>
+      <h1>Welcome to<br><span>German Learning</span></h1>
+      <p>জার্মান শেখার যাত্রা শুরু হোক এখান থেকে। বই পড়ো, নতুন শব্দ শেখো এবং নিজের গতিতে প্রতিদিন একটু একটু করে এগিয়ে যাও।</p>
+    </div>
+    <div class="welcome-art" aria-hidden="true"><div class="welcome-art-orbit"></div><div class="welcome-book">📚</div></div>
+  </div>
 </header>
+<section id="homeMenu">
+  <div class="home-section-heading">
+    <div class="mini-label">YOUR LEARNING SPACE</div>
+    <h2>আজ কী শিখতে চাও?</h2>
+    <p>তোমার শেখার জন্য একটি বিভাগ বেছে নাও</p>
+  </div>
+  <div class="home-choice-grid">
+    <button onclick="showMenu('book')" class="home-choice book-choice" aria-label="Open Book section">
+      <span class="choice-icon" aria-hidden="true">📘</span>
+      <span class="choice-content"><span class="choice-title">Book</span><span class="choice-description">জার্মান বই ও PDF পড়ার সংগ্রহ</span><span class="choice-action">Explore books <span aria-hidden="true">→</span></span></span>
+    </button>
+    <button onclick="showMenu('glossar')" class="home-choice glossar-choice" aria-label="Open Glossar section">
+      <span class="choice-icon" aria-hidden="true">📚</span>
+      <span class="choice-content"><span class="choice-title">Glossar</span><span class="choice-description">শব্দ, বাংলা অর্থ ও উদাহরণ দিয়ে শিখো</span><span class="choice-action">Explore vocabulary <span aria-hidden="true">→</span></span></span>
+    </button>
+  </div>
+</section>
+<section id="levelMenu" class="hidden max-w-3xl mx-auto px-4 py-8">
+<button onclick="goHome()" class="mb-6 px-4 py-2 rounded-lg bg-gray-200 font-semibold">← Welcome</button>
+<h2 id="levelTitle" class="text-center text-3xl font-bold mb-6">Book</h2>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<button onclick="openLevel('A1')" class="rounded-xl p-6 bg-white border-2 border-green-200 shadow font-bold text-2xl hover:bg-green-50">A1</button>
+<button onclick="openLevel('A2')" class="rounded-xl p-6 bg-white border-2 border-green-200 shadow font-bold text-2xl hover:bg-green-50">A2</button>
+<button onclick="openLevel('B1')" class="rounded-xl p-6 bg-white border-2 border-green-200 shadow font-bold text-2xl hover:bg-green-50">B1</button>
+</div></section>
+<footer id="welcomeCopyright" class="bg-green-900 text-green-100 py-4 px-4 text-center">
+  <p class="text-sm">© <span id="copyrightYear">2026</span> Developed by <a href="https://www.facebook.com/jahidul.hoqe.860232" target="_blank" rel="noopener noreferrer" class="font-semibold text-white underline underline-offset-4 hover:text-yellow-200">Jahidul Hoque</a>. All rights reserved.</p>
+</footer>
 <div class="desktop-nav sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-green-200 shadow-sm py-3 px-2 justify-center flex-wrap gap-2 hidden">
 <button onclick="showChapter(1)" class="nav-btn active px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-green-100">Kap 1</button>
 <button onclick="showChapter(2)" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-green-100">Kap 2</button>
@@ -68,7 +145,8 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
 <button onclick="showChapter(11)" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-green-100">Kap 11</button>
 <button onclick="showChapter(12)" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-green-100">Kap 12</button>
 </div>
-<main class="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 pt-6 pb-8">
+<main id="bookContent" class="hidden relative z-10 max-w-6xl mx-auto px-3 sm:px-6 pt-6 pb-8">
+<button onclick="backToLevels()" class="mb-5 px-4 py-2 rounded-lg bg-white border border-green-300 text-green-800 font-semibold shadow-sm hover:bg-green-50">← Back to Levels</button>
 <div id="chapter-1" class="chapter-section active">
 <div class="bg-gradient-to-r from-green-800 to-emerald-700 text-white px-4 py-4 text-center rounded-2xl mb-5 shadow-lg">
 <h2 class="text-lg md:text-xl font-bold text-yellow-300">Kapitel 1: Und was machst du?</h2>
@@ -8173,8 +8251,16 @@ td:nth-child(5),th:nth-child(5){min-width:180px;font-size:15px}
 <div class="mobile-nav fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-green-200 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-2 py-2 hidden overflow-x-auto">
 <div class="flex gap-1.5 min-w-max mx-auto justify-center">
 <button onclick="showChapter(1)" class="nav-btn active px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">1</button><button onclick="showChapter(2)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">2</button><button onclick="showChapter(3)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">3</button><button onclick="showChapter(4)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">4</button><button onclick="showChapter(5)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">5</button><button onclick="showChapter(6)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">6</button><button onclick="showChapter(7)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">7</button><button onclick="showChapter(8)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">8</button><button onclick="showChapter(9)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">9</button><button onclick="showChapter(10)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">10</button><button onclick="showChapter(11)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">11</button><button onclick="showChapter(12)" class="nav-btn px-3 py-2 rounded-full text-xs font-bold bg-gray-100 text-gray-700 whitespace-nowrap">12</button></div></div>
-<footer class="relative z-10 bg-green-900 text-green-200 py-6 text-center"><p class="text-sm"> <a href="https://www.facebook.com/jahidul.hoqe.860232">Develop by Jahidul Haqe</a> | A2 Glossar</p></footer>
+
+<div id="levelPlaceholder" class="hidden max-w-6xl mx-auto px-4 py-10 text-center"><button onclick="backToLevels()" class="mb-6 px-4 py-2 rounded-lg bg-white border border-green-300 text-green-800 font-semibold shadow-sm hover:bg-green-50">← Back to Levels</button><p id="placeholderText" class="text-gray-600 text-lg"></p></div>
+<footer id="siteFooter" class="hidden relative z-10 bg-green-900 text-green-200 py-6 text-center"><p class="text-sm"> <a href="https://www.facebook.com/jahidul.hoqe.860232">Develop by Jahidul Haqe</a> | A2 Glossar</p></footer>
 <script>
+let currentMenu='';
+function showMenu(menu){currentMenu=menu;document.getElementById('homeMenu').classList.add('hidden');document.getElementById('welcomeCopyright').classList.add('hidden');document.getElementById('levelMenu').classList.remove('hidden');document.getElementById('levelTitle').textContent=menu==='book'?'Book':'Glossar';document.getElementById('bookContent').classList.add('hidden');document.getElementById('levelPlaceholder').classList.add('hidden');document.getElementById('siteFooter').classList.add('hidden');document.querySelector('.desktop-nav').classList.add('hidden');document.querySelector('.mobile-nav').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function backToLevels(){document.getElementById('levelMenu').classList.remove('hidden');document.getElementById('bookContent').classList.add('hidden');document.getElementById('levelPlaceholder').classList.add('hidden');document.getElementById('siteFooter').classList.add('hidden');document.querySelector('.desktop-nav').classList.add('hidden');document.querySelector('.mobile-nav').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function goHome(){document.getElementById('welcomeHeader').classList.remove('hidden');document.getElementById('homeMenu').classList.remove('hidden');document.getElementById('welcomeCopyright').classList.remove('hidden');document.getElementById('levelMenu').classList.add('hidden');document.getElementById('bookContent').classList.add('hidden');document.getElementById('levelPlaceholder').classList.add('hidden');document.getElementById('siteFooter').classList.add('hidden');document.querySelector('.desktop-nav').classList.add('hidden');document.querySelector('.mobile-nav').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function openLevel(level){document.getElementById('levelMenu').classList.add('hidden');document.getElementById('welcomeHeader').classList.add('hidden');if(currentMenu==='glossar' && level==='A2'){document.getElementById('bookContent').classList.remove('hidden');document.getElementById('siteFooter').classList.remove('hidden');document.querySelector('.desktop-nav').classList.remove('hidden');document.querySelector('.mobile-nav').classList.remove('hidden');showChapter(1);}else{document.getElementById('levelPlaceholder').classList.remove('hidden');const p=document.getElementById('placeholderText');if(currentMenu==='book' && level==='A1'){p.innerHTML=`<div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-5 text-left"><div class="flex gap-3 items-center"><span class="text-2xl">📂</span><h3 class="font-bold text-lg text-gray-800">Google Drive Library · A1</h3></div><p class="text-gray-600 mt-2">A1 German PDF Books</p><a href="https://drive.google.com/drive/folders/1tdJOk5xdcWytm5JhIjQqtPmbKjqOJRll?usp=sharing" target="_blank" rel="noopener noreferrer" class="mt-4 flex items-center justify-center gap-3 w-full rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-5 py-4 shadow-lg transition"><span>📂</span> Open A1 PDF Books <span>↗</span></a></div>`;}else if(currentMenu==='book' && level==='A2'){p.innerHTML=`<div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-5 text-left"><div class="flex gap-3 items-center"><span class="text-2xl">📂</span><h3 class="font-bold text-lg text-gray-800">Google Drive Library · A2</h3></div><p class="text-gray-600 mt-2">A2 German PDF Books</p><a href="https://drive.google.com/drive/folders/1itfVtnuYxz4N3MugZ6VaenAp7MGH6Hnd?usp=sharing" target="_blank" rel="noopener noreferrer" class="mt-4 flex items-center justify-center gap-3 w-full rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-5 py-4 shadow-lg transition"><span>📂</span> Open A2 PDF Books <span>↗</span></a></div>`;}else if(currentMenu==='book' && level==='B1'){p.innerHTML=`<div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-5 text-left"><div class="flex gap-3 items-center"><span class="text-2xl">📂</span><h3 class="font-bold text-lg text-gray-800">Google Drive Library</h3></div><a href="https://drive.google.com/drive/folders/1QuDiGevfbj08zfoinbLBers8rZP0L16x?usp=sharing" target="_blank" rel="noopener noreferrer" class="mt-4 flex items-center justify-center gap-3 w-full rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-5 py-4 shadow-lg transition"><span>📂</span> Open B1 PDF Books <span>↗</span></a></div>`;}else if(currentMenu==='glossar' && level==='A1'){p.innerHTML=`<div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-left"><h3 class="text-xl font-bold text-gray-800 mb-3">আমরা আন্তরিকভাবে দুঃখিত!</h3><p class="text-gray-700 leading-relaxed">দুঃখিত, Glossar A1-এর শব্দভাণ্ডার এখনো তৈরি করা হয়নি। আপনার যদি A1-এর শব্দগুলোর প্রয়োজন হয়, তাহলে নিচের বাটনে ক্লিক করে Facebook-এ মেসেজ দিয়ে অনুরোধ জানাতে পারেন। পর্যাপ্ত অনুরোধ পেলে আমরা A1 শব্দভাণ্ডার তৈরি করে আপলোড করার চেষ্টা করব।</p><a href="https://www.facebook.com/jahidul.hoqe.860232" target="_blank" rel="noopener noreferrer" class="mt-5 flex items-center justify-center gap-2 w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-3 shadow transition">💬 Facebook-এ অনুরোধ করুন ↗</a></div>`;}else if(currentMenu==='glossar' && level==='B1'){p.innerHTML=`<div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-center"><div class="text-3xl mb-3">📚</div><h3 class="text-xl font-bold text-gray-800 mb-2">B1 শব্দভাণ্ডার</h3><p class="text-gray-700 leading-relaxed">B1-এর শব্দগুলো খুব শিগগিরই যুক্ত করা হবে। আমাদের সঙ্গে থাকার জন্য ধন্যবাদ!</p></div>`;}else{p.textContent=currentMenu==='book'?level+' Book content will be added here.':level+' Glossar content will be added here.';}}window.scrollTo({top:0,behavior:'smooth'});} 
+
 function showChapter(num){
 document.querySelectorAll('.chapter-section').forEach(el=>el.classList.remove('active'));
 const t=document.getElementById('chapter-'+num);if(t)t.classList.add('active');
